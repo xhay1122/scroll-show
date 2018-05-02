@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>scroll show</title>
+    <style>
+        .blck {
+            height: 300px;
+            margin: 20px 0;
+            background: #e5e5e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="blck"></div>
+    <div class="blck" id="js-jj"></div>
+    <script>
+        var node = document.getElementById('js-jj');
+        console.log(node.getClientRects(), node.getBoundingClientRect());
+        console.log(node.offsetWidth, node.offsetHeight)
+    </script>
+</body>
+</html>
