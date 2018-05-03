@@ -7,12 +7,12 @@ import React, {PureComponent} from 'react';
 class Item extends PureComponent {
     constructor(props) {
         super(props);
-        console.log('--->constructor : ', this.props.name);
+        // console.log('--->constructor : ', this.props.name);
     }
 
     render() {
 
-        console.log('--->redner : ', this.props.name);
+        // console.log('--->redner : ', this.props.name);
 
         return (
             <div>

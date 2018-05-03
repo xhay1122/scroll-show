@@ -1,5 +1,5 @@
 
-参考 [react-lazyload](https://github.com/jasonslyvia/react-lazyload/blob/master/src/index.jsx) 实现的组件动态展示插件。
+参考 [react-lazyload](https://github.com/jasonslyvia/react-lazyload/) 实现的组件动态展示插件。
 
 ## 设计初衷
 

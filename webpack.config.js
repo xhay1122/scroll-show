@@ -3,54 +3,51 @@
  */
 'use strict';
 var webpack = require('webpack');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var path = require('path');
-
-var plugins = [
-    new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-    })
-];
 
 var DEV_MODE = process.env.NODE_ENV !== 'production';
 
+var plugins = [
+    new webpack.DefinePlugin({
+        PRODUCTION: JSON.stringify(!DEV_MODE),
+    })
+];
+
 if (!DEV_MODE) {
     plugins.push(
-        new webpack.optimize.UglifyJsPlugin({
-            compressor: {
-                warnings: false
-            }
-        })
+        new UglifyJsPlugin()
     );
 }
 
 module.exports = {
-    module: {
-        loaders: [{
-            test: /\.jsx?$/,
-            loader: 'babel',
-            exclude: /node_modules/,
-            query: {
-                presets: ['react', 'es2015']
-            }
-        }]
-    },
-
+    // 入口
     entry: {
         app: './examples/app.js',
     },
-
-    watch: DEV_MODE,
-    devtool: DEV_MODE ? 'inline-source-map' : 'source-map',
-
+    // 输出目录
     output: {
         path: path.join(__dirname, 'examples/js/'),
         filename: 'bundle.min.js',
         publicPath: '/js/'
     },
-
-    plugins: plugins,
+    // 模块配置
+    module: {
+        rules: [{
+            test: /\.js?$/,
+            exclude: /node_modules/,
+            use: {
+                loader: 'babel-loader'  // .babelrc
+            }
+        }]
+    },
     resolve: {
-        extensions: ['', '.js', '.jsx']
-    }
+        // 自动识别的文件
+        extensions: ['.js', '.jsx']
+    },
+
+    watch: DEV_MODE,
+    devtool: DEV_MODE ? 'inline-source-map' : 'source-map',
+    // 其他插件列表
+    plugins: plugins
 };

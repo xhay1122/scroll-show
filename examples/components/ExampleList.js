@@ -6,7 +6,7 @@ import React, {PureComponent} from 'react';
 
 import Item from './Item';
 
-import ScrollShow from '../../src/'
+import ScrollShow from '../../es/'
 
 class ExampleList extends PureComponent{
 
