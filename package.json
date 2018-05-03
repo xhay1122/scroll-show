@@ -1,6 +1,6 @@
 {
   "name": "scroll-show",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "lib/index.js",
   "scripts": {
@@ -9,6 +9,11 @@
     "demo:build": "webpack --mode production",
     "build": "babel es/ --out-dir lib/"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xhay1122/scroll-show.git"
+  },
+  "homepage": "https://github.com/xhay1122/scroll-show",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
