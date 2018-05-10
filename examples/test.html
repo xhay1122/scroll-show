@@ -4,20 +4,85 @@
     <meta charset="UTF-8">
     <title>scroll show</title>
     <style>
+        .box {
+            height: 400px;
+            border: 1px solid;
+            overflow-y: scroll;
+        }
+
         .blck {
-            height: 300px;
+            height: 200px;
             margin: 20px 0;
             background: #e5e5e5;
         }
+
     </style>
 </head>
 <body>
-    <div class="blck"></div>
-    <div class="blck" id="js-jj"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+<div class="blck js-item"></div>
+    <div class="box" id="js-box">
+        <div class="blck js-item" id="js-item-one">xxx</div>
+        <div class="blck js-item"></div>
+        <div class="blck js-item"></div>
+        <div class="blck js-item"></div>
+    </div>
     <script>
-        var node = document.getElementById('js-jj');
-        console.log(node.getClientRects(), node.getBoundingClientRect());
-        console.log(node.offsetWidth, node.offsetHeight)
+        var ox = document.getElementById('js-box'),
+            its = document.getElementsByClassName('js-item'),
+            ito = document.getElementById('js-item-one');
+
+        ox.addEventListener('scroll', function () {
+            console.log('parent',vamm(ito))
+        }, { capture: false, passive: true });
+        // window.addEventListener('scroll', function () {
+        //     console.log('window', vamm(ito))
+        // }, { capture: false, passive: true });
+
+        function vamm(node, offset=0) {
+            let parentTop;
+            let parentHeight;
+            let parent = ox;
+
+            try {
+                ({ top: parentTop, height: parentHeight } = parent.getBoundingClientRect());
+            } catch (e) {
+                ({ top: parentTop, height: parentHeight } = defaultBoundingClientRect);
+            }
+
+            const windowInnerHeight = window.innerHeight || document.documentElement.clientHeight;
+            console.log('p',parentTop, parentHeight)
+
+            // calculate top and height of the intersection of the element's scrollParent and viewport
+            const intersectionTop = Math.max(parentTop, 0); // intersection's top relative to viewport
+            const intersectionHeight = Math.min(windowInnerHeight, parentTop + parentHeight) - intersectionTop; // height
+
+            // check whether the element is visible in the intersection
+            let top;
+            let height;
+
+            try {
+                ({ top, height } = node.getBoundingClientRect());
+            } catch (e) {
+                ({ top, height } = defaultBoundingClientRect);
+            }
+
+            const offsetTop = top - intersectionTop; // element's top relative to intersection
+
+            const offsets = Array.isArray(offset) ?
+                offset :
+                [offset, offset]; // Be compatible with previous API
+            console.log('p',top, height,offsetTop)
+
+            return (offsetTop - offsets[0] <= intersectionHeight) &&
+                (offsetTop + height + offsets[1] >= 0);
+        }
     </script>
 </body>
 </html>

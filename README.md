@@ -69,6 +69,13 @@ $ npm install --save react-lazyload
 
 控制组件接近视窗（viewport）之前多少距离展示出组件，可以避免页面滚动时抖动，建议设置该值为大于0的数
 
+### isOverflow
+
+类型：boolean 默认：false
+
+由于监听的是window上的scroll事件，所以当组件存在于某个 overflow/overflow-y:scroll/auto 的父容器当中时，该容器内部的滚动是不会被监听到的。
+可以通过手动设置组件的isOverflow属性表明元素是否存在于这让的容器中。
+
 ### scroll
 
 类型：boolean 默认：true
@@ -80,3 +87,11 @@ $ npm install --save react-lazyload
 类型：boolean 默认：false
 
 监听窗口改变事件
+
+## TODO
+
+* isOverflow 自动判断
+* 水平方向上判断判断容器是否存在
+* 添加内部元素是隐藏还是展示占位的配置与实现（目前只有隐藏）
+* 支持注解使用
+* 函数防抖与截流配置支持
