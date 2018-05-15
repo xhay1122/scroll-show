@@ -10,7 +10,7 @@ var DEV_MODE = process.env.NODE_ENV !== 'production';
 
 var plugins = [
     new webpack.DefinePlugin({
-        PRODUCTION: JSON.stringify(!DEV_MODE),
+        PRODUCTION: JSON.stringify(!DEV_MODE)
     })
 ];
 

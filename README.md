@@ -9,10 +9,11 @@
 
 ## 设计思路
 
-参考react-lazyload思路，但是该组件重点在懒加载，不在可视区域的元素不做渲染。
-但是，其实我需要把不再可视区域的元素隐藏掉，保证后续的表单校验能够正常获取到节点元素，遂作出调整。
+对比react-lazyload，其核心是控制不可见区域元素不渲染或者首次加载不渲染。
+而scroll-show做的事情是，解决某些场景下（ant-design表单提交）需要元素真实存在，但不再视窗时不Rendering。
+*react中，页面中元素过多时，当有状态改变时，会导致Rendering事件特别长，why?*
 
-改动的核心是在组件的render方法中:
+实现的核心是在组件的render方法中:
 ```jsx
 <div style={{"minHeight": minHeight}}>
     <div style={this.visible ? null : {'display': 'none'}}>
@@ -37,15 +38,19 @@ $ npm install --save react-lazyload
 
 ```
 <ScrollShow>
-    <div>内容1</div>
+    <div>普通用法</div>
 </ScrollShow>
 
 <ScrollShow minHeight={'300px'}>
-    <div>内容2</div>
+    <div>设置隐藏时占位节点的高度，为了避免滚动时抖动，建议设置成和真实组件一样的高度</div>
 </ScrollShow>
 
 <ScrollShow offset={[200,100]}>
-    <div>内容3</div>
+    <div>出现在视窗上/下偏差指定像素时让真实组件可见，可以避免滚动时抖动</div>
+</ScrollShow>
+
+<ScrollShow isOverflow={true}>
+    <div>在一个overflow元素中纵向滚动</div>
 </ScrollShow>
 ```
 
