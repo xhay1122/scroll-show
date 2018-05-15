@@ -10,7 +10,9 @@
 ## 设计思路
 
 对比react-lazyload，其核心是控制不可见区域元素不渲染或者首次加载不渲染。
+
 而scroll-show做的事情是，解决某些场景下（ant-design表单提交）需要元素真实存在，但不再视窗时不Rendering。
+
 *react中，页面中元素过多时，当有状态改变时，会导致Rendering事件特别长，why?*
 
 实现的核心是在组件的render方法中:
