@@ -21,6 +21,11 @@ const triggerHandler = (flag) => {
         checkElementVisible(item);
     })
 };
+// 更新组件
+const forceComponent = (component, isVisible) => {
+    component.visible = isVisible;
+    component.forceUpdate();
+};
 // 检查组件是否在可视区域
 const checkElementVisible = (component) => {
     const node = ReactDom.findDOMNode(component);
@@ -33,11 +38,6 @@ const checkElementVisible = (component) => {
     if (visible !== component.visible) {
         forceComponent(component, visible);
     }
-};
-// 更新组件
-const forceComponent = (component, isVisible) => {
-    component.visible = isVisible;
-    component.forceUpdate();
 };
 
 const DOM_FLAG = 'data-store-name';
