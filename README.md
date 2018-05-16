@@ -43,6 +43,10 @@ $ npm install --save react-lazyload
     <div>普通用法</div>
 </ScrollShow>
 
+// 注解形式使用
+@withScrollShow()
+class CompA extends PureComponent{}
+
 <ScrollShow minHeight={'300px'}>
     <div>设置隐藏时占位节点的高度，为了避免滚动时抖动，建议设置成和真实组件一样的高度</div>
 </ScrollShow>
@@ -100,5 +104,4 @@ $ npm install --save react-lazyload
 * isOverflow 自动判断
 * 水平方向上判断判断容器是否存在
 * 添加内部元素是隐藏还是展示占位的配置与实现（目前只有隐藏）
-* 支持注解使用
 * 函数防抖与截流配置支持

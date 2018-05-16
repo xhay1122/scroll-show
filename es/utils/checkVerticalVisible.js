@@ -58,7 +58,7 @@ export function checkOverflowVisible(node, offset = 0) {
 
 const overflowRegex = /(scroll|auto)/;
 export function getOverflowParent(node) {
-    if (!node) {
+    if (!node || node === document.documentElement) {
         return document.documentElement;
     }
 
