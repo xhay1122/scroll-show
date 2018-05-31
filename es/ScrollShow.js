@@ -127,8 +127,9 @@ class ScrollShow extends PureComponent {
     render() {
         let {children, minHeight} = this.props;
 
+        // 设置overflow': 'hidden'创建BFC防止 margin 造成页面抖动
         return (
-            <div style={{"minHeight": minHeight}}>
+            <div style={{'minHeight': minHeight, 'overflow': 'hidden'}}>
                 <div style={this.visible ? null : {'display': 'none'}}>
                     {children}
                 </div>
